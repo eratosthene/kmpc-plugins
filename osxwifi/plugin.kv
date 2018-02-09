@@ -1,0 +1,58 @@
+#:kivy 1.10.0
+#:import osxwifiPluginContent plugin.osxwifiPluginContent
+#:import PSKPopup plugin.PSKPopup
+
+<PSKPopup>:
+    title: 'Preshared Key'
+    auto_dismiss: False
+    size_hint_y: 0.5
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: 0.1
+            TextInput:
+                id: psk
+                text: ''
+        BoxLayout:
+            size_hint_y: 0.1
+            orientation: 'horizontal'
+            Button:
+                text: 'OK'
+                on_press: root.plugin.connect2(root.ids.psk.text)
+                on_press: root.dismiss()
+            Button:
+                text: 'Cancel'
+                on_press: root.dismiss()
+
+<osxwifiPluginContent>:
+    orientation: 'vertical'
+    Button:
+        size_hint_y: 0.1
+        text: 'Scan'
+        on_release: root.scan()
+    Button:
+        size_hint_y: 0.1
+        text: 'Connect'
+        on_release: root.connect()
+        disabled: True
+        id: connectbutton
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgba: 0,0,0,0.5
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        padding: '5sp'
+        ScrollView:
+            id: sv
+            do_scroll_x: False
+            scroll_type: ['bars','content']
+            bar_width: sp(40)
+            GridLayout:
+                cols: 1
+                spacing: '10sp'
+                row_default_height: '48sp'
+                size_hint_y: None
+                height: self.minimum_height
+                id: apbox

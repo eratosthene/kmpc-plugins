@@ -20,7 +20,7 @@ from twisted.internet.defer import Deferred
 class PSKPopup(Popup):
     plugin=ObjectProperty(None)
 
-class wifiPluginContent(BoxLayout):
+class kivypiewifiPluginContent(BoxLayout):
 
     def scan(self):
         from twisted.internet import reactor
